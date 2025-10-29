@@ -28,6 +28,7 @@ class PersonScreen extends StatefulWidget {
 class _PersonScreenState extends State<PersonScreen> {
   List<Map<String, dynamic>> itemList = [
     {'title': StringConstants.editProfile, 'icon': Icons.person},
+    {'title': StringConstants.myOrders, 'icon': Icons.shopping_bag},
     {
       'title': StringConstants.deliveryAddress,
       'icon': Icons.delivery_dining_outlined,
@@ -60,6 +61,7 @@ class _PersonScreenState extends State<PersonScreen> {
           return Scaffold(
             backgroundColor: AppColors.primary,
             body: Container(
+              // clipBehavior: Clip.hardEdge,
               child: state is PersonLoading
                   ? const Center(child: CircularProgressIndicator())
                   : Column(
@@ -73,6 +75,7 @@ class _PersonScreenState extends State<PersonScreen> {
                               BlocBuilder<ImagePickerBloc, ImagePickerState>(
                                 builder: (context, imageState) {
                                   return Container(
+                                    clipBehavior: Clip.hardEdge,
                                     height: 100.h,
                                     width: 100.h,
                                     decoration: BoxDecoration(

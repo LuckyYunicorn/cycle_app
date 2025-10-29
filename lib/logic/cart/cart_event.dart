@@ -1,3 +1,4 @@
+import 'package:bloc_project/data/models/my_orders_model.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../data/models/get_product_model.dart';
@@ -25,18 +26,24 @@ class RemoveProductFromCart extends CartEvent {
   List<Object?> get props => [productId];
 }
 
-class IncreaseQuantity extends CartEvent{
+class IncreaseQuantity extends CartEvent {
   final int productId;
   IncreaseQuantity(this.productId);
   @override
-  List<Object?> get props=> [productId];
+  List<Object?> get props => [productId];
 }
 
-class DecreaseQuantity extends CartEvent{
+class DecreaseQuantity extends CartEvent {
   final int productId;
   DecreaseQuantity(this.productId);
   @override
-  List<Object?> get props=> [productId];
+  List<Object?> get props => [productId];
+}
+
+class TransferDataToMyOrder extends CartEvent {
+  final List<Product> productList;
+  TransferDataToMyOrder({required this.productList});
+
 }
 
 class ClearCart extends CartEvent {}

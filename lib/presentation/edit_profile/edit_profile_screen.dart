@@ -68,7 +68,6 @@ class _EditProfileState extends State<EditProfileScreen> {
           create: (context) =>
               EditProfileBloc()..add(FetchProfileData(widget.userModel)),
         ),
-
       ],
       child: BlocListener<EditProfileBloc, EditProfileState>(
         listener: (context, state) {
@@ -121,6 +120,7 @@ class _EditProfileState extends State<EditProfileScreen> {
                                     ImagePickerState
                                   >(
                                     builder: (context, state) {
+
                                       if (state is ImagePickerDone) {
                                         //Todo
                                         imageController = TextEditingController(
@@ -128,6 +128,7 @@ class _EditProfileState extends State<EditProfileScreen> {
                                         );
                                       }
                                       return Container(
+                                        clipBehavior: Clip.hardEdge,
                                         height: 100.h,
                                         width: 100.h,
                                         decoration: BoxDecoration(

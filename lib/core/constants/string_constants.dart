@@ -38,6 +38,8 @@ class StringConstants {
   static const String total = 'Total';
   static const String profile = 'Profile';
   static const String editProfile = 'Edit Profile';
+  static const String myOrders = 'My Orders';
+  static const String myOrdersStatus = 'My Order Status';
   static const String deliveryAddress = 'Delivery Address';
   static const String orderHistory = 'Order History';
   static const String reels = 'Reels(Videos)';

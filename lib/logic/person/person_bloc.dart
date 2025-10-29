@@ -52,31 +52,36 @@ class PersonBloc extends Bloc<PersonEvent, PersonState> {
         break;
       case 1:
         {
-          NavigationService.pushNamed(AppRoutes.deliveryAddress);
+          NavigationService.pushNamed(AppRoutes.myOrder);
         }
         break;
       case 2:
         {
-          NavigationService.pushNamed(AppRoutes.orderHistory);
+          NavigationService.pushNamed(AppRoutes.deliveryAddress);
         }
         break;
       case 3:
         {
-          NavigationService.pushNamed(AppRoutes.cacheReel);
+          NavigationService.pushNamed(AppRoutes.orderHistory);
         }
         break;
       case 4:
         {
-          NavigationService.pushNamed(AppRoutes.notifications);
+          NavigationService.pushNamed(AppRoutes.cacheReel);
         }
         break;
       case 5:
+        {
+          NavigationService.pushNamed(AppRoutes.notifications);
+        }
+        break;
+      case 6:
         {
           NavigationService.pushNamed(AppRoutes.setting);
         }
         break;
 
-      case 6:
+      case 7:
         {
           CommonWidgets.showAlertDialog(
             onPressedYes: () {

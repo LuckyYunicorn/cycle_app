@@ -1,5 +1,6 @@
 import 'package:bloc_project/logic/bottom_nav/bottom_nav_bloc.dart';
 import 'package:bloc_project/logic/delivery_address/delivery_address_bloc.dart';
+import 'package:bloc_project/logic/my_orders/my_order_bloc.dart';
 import 'package:bloc_project/logic/person/person_bloc.dart';
 import 'package:bloc_project/routes/app_router.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => FavoriteBloc()),
         BlocProvider(create: (context) => ImagePickerBloc()),
         BlocProvider(create: (_) => DeliveryAddressBloc()),
+        BlocProvider(create: (_) => MyOrderBloc()),
         // Add other global blocs here
       ],
       child: ScreenUtilInit(

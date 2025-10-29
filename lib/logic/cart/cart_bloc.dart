@@ -4,39 +4,53 @@ import 'package:bloc_project/logic/cart/cart_event.dart';
 import 'package:bloc_project/logic/cart/cart_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CartBloc extends Bloc<CartEvent,CartState>{
+import '../../data/models/my_orders_model.dart';
+import '../my_orders/my_order_bloc.dart';
 
-  CartBloc():super(CartState()){
+class CartBloc extends Bloc<CartEvent, CartState> {
+  CartBloc() : super(CartState()) {
     on<AddProductToCart>(_onAddProduct);
     on<RemoveProductFromCart>(_removeProductFromCart);
     on<IncreaseQuantity>(_increaseQuantity);
     on<DecreaseQuantity>(_decreaseQuantity);
+    on<ClearCart>(_clearCart);
+    on<TransferDataToMyOrder>(_transferData);
   }
 
-
   void _onAddProduct(AddProductToCart event, Emitter<CartState> emit) {
-    final existingIndex = state.cartItems.indexWhere((item) => item.id == event.product.id);
+    final existingIndex = state.cartItems.indexWhere(
+      (item) => item.id == event.product.id,
+    );
     List<Product> updatedItems = List.from(state.cartItems);
 
     if (existingIndex != -1) {
       // Product already in cart → Increase Quantity
       final existingProduct = updatedItems[existingIndex];
-      updatedItems[existingIndex] = existingProduct.copyWith(quantity: existingProduct.quantity + 1);
+      updatedItems[existingIndex] = existingProduct.copyWith(
+        quantity: existingProduct.quantity + 1,
+      );
     } else {
       // Product not in cart → Add to cart with quantity = 1
       updatedItems.add(event.product.copyWith(quantity: 1));
     }
 
     emit(CartState(cartItems: updatedItems));
-    CommonWidgets.snackBarView(title: 'Product added to your cart...', success: true);
+    CommonWidgets.snackBarView(
+      title: 'Product added to your cart...',
+      success: true,
+    );
   }
 
-
-  void _removeProductFromCart(RemoveProductFromCart event,Emitter<CartState> emit){
-    final updatedItems = state.cartItems.where((item) => item.id!= event.productId).toList();
+  void _removeProductFromCart(
+    RemoveProductFromCart event,
+    Emitter<CartState> emit,
+  ) {
+    final updatedItems = state.cartItems
+        .where((item) => item.id != event.productId)
+        .toList();
     emit(CartState(cartItems: updatedItems));
-
   }
+
   void _increaseQuantity(IncreaseQuantity event, Emitter<CartState> emit) {
     List<Product> updatedItems = state.cartItems.map((item) {
       if (item.id == event.productId) {
@@ -57,5 +71,33 @@ class CartBloc extends Bloc<CartEvent,CartState>{
     }).toList();
 
     emit(CartState(cartItems: updatedItems));
+  }
+
+  void _clearCart(ClearCart event, Emitter<CartState> emit) {
+    // final List<MyOrdersModel> myOrders = List.from(state.cartItems);
+    // emit();
+    emit(CartState(cartItems: []));
+  }
+
+  void _transferData(TransferDataToMyOrder event , Emitter<CartState> emit){
+
+     final List<MyOrdersModel> list = event.productList.map((e) {
+      return MyOrdersModel(
+        id: e.id,
+        title: e.title,
+        price: e.price,
+        quantity: e.quantity,
+        image: e.image,
+        date: DateTime.now(),
+        status: "shipping",
+        // status: "out_of_delivery",
+        // status: "out_of_delivery",
+        isFavorite: e.isFavorite,
+      );
+    }).toList();
+
+     // BlocProvider.of<MyOrderBloc>(context).add(
+     //   AddCheckoutDataEvent(myOrderModelList: list),
+     // );
   }
 }

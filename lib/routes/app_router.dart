@@ -4,6 +4,8 @@ import 'package:bloc_project/presentation/bottom_nav/bottom_nav_screen.dart';
 import 'package:bloc_project/presentation/cache_reel/cache_reel_screen.dart';
 import 'package:bloc_project/presentation/delivery_address/delivery_address_screen.dart';
 import 'package:bloc_project/presentation/edit_profile/edit_profile_screen.dart';
+import 'package:bloc_project/presentation/my_order_status/my_order_status_screen.dart';
+import 'package:bloc_project/presentation/my_orders/my_orders_screen.dart';
 import 'package:bloc_project/presentation/notifications/notification_screen.dart';
 import 'package:bloc_project/presentation/order_history/order_history_screen.dart';
 import 'package:bloc_project/presentation/product_detail/product_detail_screen.dart';
@@ -31,6 +33,8 @@ class AppRoutes {
   static const String deliveryAddress = '/delivery_address';
   static const String addAddress = '/add_address';
   static const String cacheReel = '/cache_reel';
+  static const String myOrder = '/my_order';
+  static const String myOrderStatus = '/my_order_status';
 
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -82,6 +86,12 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => DeliveryAddressScreen());
       case addAddress:
         return MaterialPageRoute(builder: (_) => AddAddressScreen());
+      case myOrder:
+        return MaterialPageRoute(builder: (_) => MyOrdersScreen());
+      case myOrderStatus:
+        return MaterialPageRoute(
+          builder: (_) => MyOrderStatusScreen(status: args),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
