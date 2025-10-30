@@ -289,9 +289,11 @@ class CartScreen extends StatelessWidget {
                               onPressed: () {
                                 //Todo : Checkout action
                                 print("Checkout");
-                                // final cartItems = List.from(
-                                //   context.read<CartBloc>().state.cartItems,
-                                // );
+                                final cartItems = List.from(
+                                  context.read<CartBloc>().state.cartItems,
+                                );
+
+                                //Todo
                                 // final List<MyOrdersModel> list = cartItems.map((
                                 //   e,
                                 // ) {
@@ -309,11 +311,11 @@ class CartScreen extends StatelessWidget {
                                 //   );
                                 // }).toList();
 
-                                //Bloc for adding data before clearing the list
-                                // context.read<MyOrderBloc>().add(
-                                //   AddCheckoutDataEvent(myOrderModelList: list),
-                                // );
-                                print("${list[0].title}");
+                                // Bloc for adding data before clearing the list
+                                context.read<MyOrderBloc>().add(
+                                  AddCheckoutDataEvent(productList: cartItems),
+                                );
+                                // print("${list[0].title}");
                                 context.read<CartBloc>().add(ClearCart());
                                 print("Clear");
                               },
