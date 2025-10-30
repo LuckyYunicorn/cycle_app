@@ -18,7 +18,7 @@ class MyOrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backGroundColor,
+      // backgroundColor: AppColors.backGroundColor,
       resizeToAvoidBottomInset: false,
       appBar: CommonWidgets.appBar(title: StringConstants.myOrders),
       body: SafeArea(
@@ -53,11 +53,11 @@ class MyOrdersScreen extends StatelessWidget {
                       ),
                       title: Text(
                         state.myOrderModelList[index].title,
-                        style: AppTextStyle.titleStyle16bw,
+                        style: AppTextStyleNew.titleStyle10bbL,
                       ),
                       subtitle: Text(
-                        "${state.myOrderModelList[index].date}",
-                        style: AppTextStyle.titleStyle14gr,
+                        "Date ${state.myOrderModelList[index].date}",
+                        style: AppTextStyleNew.titleStyle10bbM,
                       ),
                       trailing: Column(
                         children: [
